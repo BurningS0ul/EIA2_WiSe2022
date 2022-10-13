@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'KH2 ALL MENU';
+    src: url('KH2ALLMENUItalic.eot');
+    src: url('KH2ALLMENUItalic.eot?#iefix') format('embedded-opentype'),
+        url('KH2ALLMENUItalic.woff2') format('woff2'),
+        url('KH2ALLMENUItalic.woff') format('woff'),
+        url('KH2ALLMENUItalic.svg#KH2ALLMENUItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+

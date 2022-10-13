@@ -1,0 +1,28 @@
+body {
+    background-color: #000000;
+}
+
+h1 {
+    font-family: 'BBS';
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+    width: 800px;
+}
+
+h1 p {
+    color: #ffbb00;
+}
+
+.txt {
+    padding: 10px;
+    width: 800px;
+    margin: auto;
+}
+
+.bg {
+    background: url("../extra/orbs.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+}
