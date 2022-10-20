@@ -1,0 +1,35 @@
+body {
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+div {
+    display: inline-flex;
+    margin: auto;
+}
+
+.div0 {
+    width: 800px;
+    height: 800px;
+    margin: 0 60px;
+    background-color: #402424;
+}
+
+.div1 {
+    width: 800px;
+    height: 800px;
+    background-color: #231f55;
+}
+
+.spanA {
+    display: none;
+    height: 200px;
+    width: 300px;
+    background-color: #165a1d;
+}
+
+.spanA:hover {
+    display: block;
+    overflow: hidden;
+    position: fixed;
+}
