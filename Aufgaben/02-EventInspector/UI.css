@@ -9,27 +9,21 @@ div {
 }
 
 .div0 {
-    width: 800px;
-    height: 800px;
-    margin: 0 60px;
+    width: 600px;
+    height: 600px;
+    margin: 0 40px;
     background-color: #402424;
 }
 
 .div1 {
-    width: 800px;
-    height: 800px;
+    width: 600px;
+    height: 600px;
     background-color: #231f55;
 }
 
-.spanA {
-    display: none;
+#spanA {
+    position: fixed;
     height: 200px;
     width: 300px;
     background-color: #165a1d;
-}
-
-.spanA:hover {
-    display: block;
-    overflow: hidden;
-    position: fixed;
 }
