@@ -1,0 +1,109 @@
+body {
+    background-color: #303646;
+    margin: 0px;
+    width: 1440px;
+    height: 1024px;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.nav {
+    background-color: #826334;
+    width: 1440px;
+    height: 80px;
+    display: flex;
+}
+
+.store {
+    width: 1400px;
+    display: inline-flex;
+    margin: auto;
+}
+
+.shelves {
+    background-color: #a59c8d;
+    margin: 20px;
+    width: 660px;
+    height: 725px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.item {
+    background-color: #826334;
+    margin: 10px 20px;
+    width: 620px;
+    height: 65px;
+}
+
+.check {
+    margin: 25px 10px 0px 10px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.fa-drumstick-bite {
+    margin: 20px 10px 0px 50px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.name {
+    margin: 10px 10px 0px 100px;
+    position: absolute;
+}
+
+.date {
+    margin: 10px 10px 0px 350px;
+    position: absolute;
+}
+
+.comment {
+    margin: 35px 10px 0px 100px;
+    width: 360px;
+    position: absolute;
+}
+
+.num {
+    margin: 10px 10px 0px 480px;
+    height: 40px;
+    width: 40px;
+    font-size: larger;
+    position: absolute;
+}
+
+.fa-trash-can {
+    margin: 15px 10px 0px 560px;
+    color: #d10f0f;
+    position: absolute;
+}
+
+.stock {
+    background-color: #826334;
+    display: inline-block;
+    margin: 10px 20px;
+    width: 620px;
+    height: 65px;
+}
+
+.stock .name {
+    margin: 25px 10px 0px 80px;
+    width: 260px;
+    position: absolute;
+}
+
+.stock .date {
+    margin: 25px 10px 0px 350px;
+    position: absolute;
+}
+
+.stock .fa-drumstick-bite {
+    margin: 20px 10px 0px 20px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
