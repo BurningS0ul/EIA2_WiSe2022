@@ -14,48 +14,63 @@
 <body>
     <div class="nav"></div>
     <div class="store">
-        <div class="shelves">
-            <h1>Einkaufsliste</h1>
+        <div class="stock">
             <div class="item">
-                <input class="check" type="checkbox">
-                <i class="fa-solid fa-drumstick-bite fa-2x"></i>
+                <input class="num" type="number" id="quantity" name="quantity" min="1" max="99" placeholder="0">
                 <input class="name" type="text" placeholder="name">
-                <input class="date" type="date">
-                <input class="num" type="number" id="quantity" name="quantity" min="1" max="99" placeholder="00">
-                <i class="fa-solid fa-trash-can fa-2x"></i>
+                <select class="category">
+                    <option value="" disable select hidden> Choose Category </option>
+                    <option value="fruits"> Fruits </option>
+                    <option value="milk"> Milk products </option>
+                    <option value="vegetables"> Vegetables </option>
+                    <option value="pastries"> Pastries </option>
+                    <option value="meat"> Meat </option>
+                    <option value="fish"> Fish </option>
+                    <option value="ingredients"> Ingredients </option>
+                    <option value="spices"> Spices </option>
+                    <option value="convenience"> Convenience </option>
+                    <option value="snacks"> Snacks & Sweets </option>
+                    <option value="beverages"> Beverages </option>
+                    <option value="household"> Household </option>
+                    <option value="care"> Care & Health </option>
+                    <option value="pet"> Pet Supplies </option>
+                    <option value="home"> Home & Garden </option>
+                    <option value="etc"> Own Items </option>
+                </select>
                 <input class="comment" type="text" placeholder="comment">
+                <input class="submit" type="submit" value="Submit">
             </div>
-            <div class="item">
-                <input class="check" type="checkbox">
-                <i class="fa-solid fa-drumstick-bite fa-2x"></i>
-                <input class="name" type="text" placeholder="name">
-                <input class="date" type="date">
-                <input class="num" type="number" id="quantity" name="quantity" min="1" max="99" placeholder="00">
-                <i class="fa-solid fa-trash-can fa-2x"></i>
-                <input class="comment" type="text" placeholder="comment">
-            </div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
         </div>
         <div class="shelves">
-            <h1>Last Bought/Suggested</h1>
-            <div class="stock">
-                <i class="fa-solid fa-drumstick-bite fa-2x"></i>
-                <input class="name" type="text" placeholder="type here what you want to buy">
-                <input class="date" type="date">
-                <input class="num" type="number" id="quantity" name="quantity" min="0" max="99" placeholder="00">
-                <i class="fa-solid fa-trash-can fa-2x"></i>
+            <div class="title">
+                <input type="checkbox">
+                <h1>Number</h1>
+                <h1>Name</h1>
+                <h1>Date</h1>
+                <h1>Type</h1>
+                <h1>Comment</h1>
+                <button class="delete">Delete all</button>
             </div>
-            <div class="stock"></div>
-            <div class="stock"></div>
-            <div class="stock"></div>
-            <div class="stock"></div>
-            <div class="stock"></div>
+            <div class="item">
+                <input class="check" type="checkbox">
+                <p>4</p>
+                <p>Chicken Wings</p>
+                <p class="date">DD/MM/YYYY</p>
+                <i class="fa-solid fa-drumstick-bite"></i>
+                <p>good comment</p>
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
         </div>
     </div>
+    <footer>
+        <a href="./Einkaufsliste_Konzept_v2.0.png" target="_blank">Konzept</a>
+    </footer>
 </body>
 
 </html>
