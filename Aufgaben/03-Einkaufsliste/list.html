@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script type="text/javascript" src="./store.js"></script>
+    <script type="text/javascript" src="./data.js"></script>
     <title>Einkaufsliste</title>
 </head>
 
@@ -18,24 +19,24 @@
             <div class="item">
                 <input class="num" type="number" id="quantity" name="quantity" min="1" max="99" placeholder="0">
                 <input class="name" type="text" placeholder="name">
-                <select class="category">
-                    <option value="" disable select hidden> Choose Category </option>
-                    <option value="fruits"> Fruits </option>
-                    <option value="milk"> Milk products </option>
-                    <option value="vegetables"> Vegetables </option>
-                    <option value="pastries"> Pastries </option>
-                    <option value="meat"> Meat </option>
-                    <option value="fish"> Fish </option>
-                    <option value="ingredients"> Ingredients </option>
-                    <option value="spices"> Spices </option>
-                    <option value="convenience"> Convenience </option>
-                    <option value="snacks"> Snacks & Sweets </option>
-                    <option value="beverages"> Beverages </option>
-                    <option value="household"> Household </option>
-                    <option value="care"> Care & Health </option>
-                    <option value="pet"> Pet Supplies </option>
-                    <option value="home"> Home & Garden </option>
-                    <option value="etc"> Own Items </option>
+                <select id="category">
+                    <option name="" disable select hidden> Choose Category </option>
+                    <option name="fruits"> Fruits </option>
+                    <option name="milk"> Milk products </option>
+                    <option name="vegetables"> Vegetables </option>
+                    <option name="pastries"> Pastries </option>
+                    <option name="meat"> Meat </option>
+                    <option name="fish"> Fish </option>
+                    <option name="ingredients"> Ingredients </option>
+                    <option name="spices"> Spices </option>
+                    <option name="convenience"> Convenience </option>
+                    <option name="snacks"> Snacks & Sweets </option>
+                    <option name="beverages"> Beverages </option>
+                    <option name="household"> Household </option>
+                    <option name="care"> Care & Health </option>
+                    <option name="pet"> Pet Supplies </option>
+                    <option name="home"> Home & Garden </option>
+                    <option name="etc"> Own Items </option>
                 </select>
                 <input class="comment" type="text" placeholder="comment">
                 <input class="submit" type="submit" value="Submit">
@@ -51,21 +52,15 @@
                 <h1>Comment</h1>
                 <button class="delete">Delete all</button>
             </div>
-            <div class="item">
-                <input class="check" type="checkbox">
-                <p>4</p>
-                <p>Chicken Wings</p>
-                <p class="date">DD/MM/YYYY</p>
-                <i class="fa-solid fa-drumstick-bite"></i>
-                <p>good comment</p>
-                <i class="fa-solid fa-trash-can"></i>
+            <div id="category">
+                <div class="item">
+                    <input class="check" type="checkbox">
+                    <fieldset id="amount"></fieldset>
+                    <fieldset id="name"></fieldset>
+                    <fieldset id="category"></fieldset>
+                    <fieldset id="comment"></fieldset>
+                </div>
             </div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
         </div>
     </div>
     <footer>

@@ -7,18 +7,18 @@ Quellen: -
 */
 var shoppingList;
 (function (shoppingList) {
-    window.addEventListener("load", loadListener);
-    function loadListener() {
+    window.addEventListener("load", handleLoad);
+    function handleLoad() {
         let submit = document.querySelector(".submit");
         let check = document.querySelector(".check");
-        let currentdate = document.querySelector(".date");
+        // let currentdate = <HTMLDivElement>document.querySelector(".date");
         let deleteall = document.querySelector(".delete");
-        let deleted = document.querySelector(".fa-trash-can");
-        currentdate.innerHTML = grabDate();
+        // let deleted = <HTMLElement>document.querySelector(".fa-trash-can");
+        // currentdate.innerHTML = grabDate();
         submit.addEventListener("click", logItems);
         check.addEventListener("click", isChecked);
         deleteall.addEventListener("click", emptyCart);
-        deleted.addEventListener("click", throwItem);
+        // deleted.addEventListener("click", throwItem);
     }
     function emptyCart() {
         console.log("Emptied the whole Cart!");
@@ -33,8 +33,17 @@ var shoppingList;
         let name = document.querySelector(".name");
         let num = document.querySelector(".num");
         let comment = document.querySelector(".comment");
-        let type = document.querySelector(".category");
+        let type = document.querySelector("#category");
         console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+    }
+    function generateItem(_item, _category) {
+        let group = document.createElement(".item");
+        for (let item of _item) {
+            group.textContent = item.name;
+            group.innerHTML = item.name;
+            group.appendChild(group);
+        }
+        return group;
     }
     function grabDate() {
         let date = new Date();
