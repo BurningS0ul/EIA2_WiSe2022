@@ -57,5 +57,28 @@ var shoppingList;
             { name: "Shoes", amount: 48, comment: "Tennis" }
         ]
     };
+    function generateItem(_data) {
+        console.log("working");
+        for (let category in _data) {
+            let items = _data[category];
+        }
+    }
+    shoppingList.generateItem = generateItem;
+    function generateGroup(_items, _category) {
+        let group = document.createElement(".item");
+        for (let item of _items) {
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = item.name;
+            checkbox.name = _category;
+            checkbox.id = item.name;
+            let label = document.createElement("label");
+            label.textContent = item.name;
+            label.htmlFor = item.name;
+            group.appendChild(checkbox);
+        }
+        return group;
+    }
+    shoppingList.generateGroup = generateGroup;
 })(shoppingList || (shoppingList = {}));
 //# sourceMappingURL=data.js.map

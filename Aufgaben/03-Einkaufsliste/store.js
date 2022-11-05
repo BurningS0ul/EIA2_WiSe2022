@@ -9,6 +9,7 @@ var shoppingList;
 (function (shoppingList) {
     window.addEventListener("load", handleLoad);
     function handleLoad() {
+        shoppingList.generateItem(shoppingList.data);
         let submit = document.querySelector(".submit");
         let check = document.querySelector(".check");
         // let currentdate = <HTMLDivElement>document.querySelector(".date");
@@ -34,23 +35,20 @@ var shoppingList;
         let num = document.querySelector(".num");
         let comment = document.querySelector(".comment");
         let type = document.querySelector("#category");
-        console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
-    }
-    function generateItem(_item, _category) {
-        let group = document.createElement(".item");
-        for (let item of _item) {
-            group.textContent = item.name;
-            group.innerHTML = item.name;
-            group.appendChild(group);
-        }
-        return group;
-    }
-    function grabDate() {
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return day + "/" + month + "/" + year;
+        // console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        let item = document.querySelector(".item");
+        let checkbox = document.querySelector("input");
+        checkbox.type = "checkbox";
+        let label = document.createElement(".item");
+        label.innerHTML = num.value + name.value + grabDate() + type.value + comment.value;
+        item.appendChild(label);
     }
 })(shoppingList || (shoppingList = {}));
+function grabDate() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return day + "/" + month + "/" + year;
+}
 //# sourceMappingURL=store.js.map

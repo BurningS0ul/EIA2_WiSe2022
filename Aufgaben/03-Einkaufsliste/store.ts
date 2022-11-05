@@ -11,6 +11,8 @@ namespace shoppingList {
 
     function handleLoad() {
 
+        generateItem(data);
+
         let submit = <HTMLButtonElement>document.querySelector(".submit");
         let check = <HTMLInputElement>document.querySelector(".check");
         // let currentdate = <HTMLDivElement>document.querySelector(".date");
@@ -18,7 +20,6 @@ namespace shoppingList {
         // let deleted = <HTMLElement>document.querySelector(".fa-trash-can");
 
         // currentdate.innerHTML = grabDate();
-
         submit.addEventListener("click", logItems);
 
         check.addEventListener("click", isChecked);
@@ -45,25 +46,22 @@ namespace shoppingList {
         let comment = <HTMLInputElement>document.querySelector(".comment");
         let type = <HTMLSelectElement>document.querySelector("#category");
 
-        console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        // console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        let item = <HTMLDivElement>document.querySelector(".item");
 
-    }
+        let checkbox = <HTMLInputElement>document.querySelector("input");
+        checkbox.type = "checkbox";
 
-    function generateItem(_item: Item[], _category: string) {
-        let group: HTMLElement = document.createElement(".item");
-        for (let item of _item) {
-            group.textContent = item.name;
-            group.innerHTML = item.name;
+        let label = <HTMLDivElement>document.createElement(".item");
+        label.innerHTML = num.value + name.value + grabDate() + type.value + comment.value;
 
-            group.appendChild(group);
-        }
-        return group;
+        item.appendChild(label);
     }
-    function grabDate() {
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return day + "/" + month + "/" + year;
-    }
+}
+function grabDate() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    return day + "/" + month + "/" + year;
 }
