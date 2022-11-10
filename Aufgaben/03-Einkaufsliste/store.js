@@ -1,54 +1,58 @@
 "use strict";
-/* Aufgabe: 03-Einkaufsliste
+/* Aufgabe: 03-Einkaufsliste/ 04-Data struct/ 05-Json update
 Name: Arthur Aguiar Rafael
 Matrikel: 271023
-Datum: 27.10.2022
+Datum: 27.10.2022/ 03.11.2022/ 10.11.2022
 Quellen: -
 */
 var shoppingList;
 (function (shoppingList) {
     window.addEventListener("load", handleLoad);
-    function handleLoad() {
-        shoppingList.generateItem(shoppingList.data);
-        let submit = document.querySelector(".submit");
-        let check = document.querySelector(".check");
-        // let currentdate = <HTMLDivElement>document.querySelector(".date");
-        let deleteall = document.querySelector(".delete");
-        // let deleted = <HTMLElement>document.querySelector(".fa-trash-can");
-        // currentdate.innerHTML = grabDate();
-        submit.addEventListener("click", logItems);
-        check.addEventListener("click", isChecked);
-        deleteall.addEventListener("click", emptyCart);
-        // deleted.addEventListener("click", throwItem);
+    async function handleLoad(_event) {
+        let response = await fetch("Data.json");
+        let offer = await response.text();
+        let data = JSON.parse(offer);
+        console.log(data);
+        shoppingList.generateItem(data);
+        let bt = document.querySelector(".submit");
+        let del = document.querySelector(".fa-trash-can");
+        bt.addEventListener("click", logItems);
+        del.addEventListener("click", deleteItems);
     }
-    function emptyCart() {
-        console.log("Emptied the whole Cart!");
-    }
-    function throwItem() {
-        console.log("Threw Item away.");
-    }
-    function isChecked() {
-        console.log("check: clicked");
-    }
-    function logItems() {
+    function logItems(_event) {
+        console.log(_event.currentTarget);
         let name = document.querySelector(".name");
         let num = document.querySelector(".num");
         let comment = document.querySelector(".comment");
         let type = document.querySelector("#category");
-        // console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
-        let item = document.querySelector(".item");
-        let checkbox = document.querySelector("input");
+        console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        let label = document.createElement(".item");
-        label.innerHTML = num.value + name.value + grabDate() + type.value + comment.value;
-        item.appendChild(label);
+        let im = document.querySelector(".item");
+        let placehold = document.createElement("div");
+        let trash = document.createElement("button");
+        trash.type = ".fa-trash-can";
+        im.appendChild(checkbox);
+        placehold.textContent = name.value + " " + num.value + " " + grabDate() + " " + type.value + " " + comment.value;
+        im.appendChild(placehold);
+        im.appendChild(trash);
+    }
+    function grabDate() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        return day + "/" + month + "/" + year;
+    }
+    function deleteItems(_event) {
+        console.log("deleted");
+        let placehold = document.querySelector("div");
+        if (_event.currentTarget == document.querySelector(".fa-trash-can")) {
+            placehold.removeChild(placehold);
+        }
+        if (_event.currentTarget == document.querySelector(".delete")) {
+            placehold.remove();
+        }
     }
 })(shoppingList || (shoppingList = {}));
-function grabDate() {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return day + "/" + month + "/" + year;
-}
 //# sourceMappingURL=store.js.map
