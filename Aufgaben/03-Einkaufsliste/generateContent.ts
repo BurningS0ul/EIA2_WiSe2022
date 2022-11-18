@@ -1,5 +1,6 @@
 namespace shoppingList {
     export interface Item {
+        newItem: string;
         name: string;
         amount: number;
         comment: string;
@@ -10,6 +11,7 @@ namespace shoppingList {
     }
 
     export function generateItem(_data: Data) {
+
         console.log("working");
         for (let category in _data) {
             let items: Item[] = _data[category];

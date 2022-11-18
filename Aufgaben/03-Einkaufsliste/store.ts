@@ -8,6 +8,7 @@ Quellen: -
 namespace shoppingList {
 
     window.addEventListener("load", handleLoad);
+    let url: string = "https://webuser.hs-furtwangen.de/~aguiarra/Database/";
 
     async function handleLoad(_event: Event): Promise<void> {
 
@@ -18,6 +19,16 @@ namespace shoppingList {
 
         generateItem(data);
 
+        let query: URLSearchParams = new URLSearchParams();
+        // query.set("command", "find");
+        // query.set("collection", "Data");
+        query.set("command", "show");
+        console.log(query.toString());
+
+        let res: Response = await fetch(url + "?" + query.toString());
+        let resText: string = await res.text();
+        alert(resText);
+
         let bt: HTMLInputElement = <HTMLInputElement>document.querySelector(".submit");
         let del: HTMLElement = <HTMLElement>document.querySelector(".fa-trash-can");
 
@@ -26,7 +37,7 @@ namespace shoppingList {
     }
 
     function logItems(_event: Event) {
-        console.log(_event.currentTarget);
+        // console.log(_event.currentTarget);
         let name = <HTMLInputElement>document.querySelector(".name");
         let num = <HTMLInputElement>document.querySelector(".num");
         let comment = <HTMLInputElement>document.querySelector(".comment");
@@ -38,7 +49,7 @@ namespace shoppingList {
         checkbox.type = "checkbox";
 
         let im: HTMLDivElement = <HTMLDivElement>document.querySelector(".item");
-        let placehold: HTMLDivElement = <HTMLDivElement>document.createElement("div");
+        let placehold: HTMLLabelElement = <HTMLLabelElement>document.createElement("label");
         let trash: HTMLButtonElement = <HTMLButtonElement>document.createElement("button");
         trash.type = ".fa-trash-can";
         im.appendChild(checkbox);
@@ -58,11 +69,11 @@ namespace shoppingList {
     function deleteItems(_event: Event) {
         console.log("deleted");
         let placehold: HTMLDivElement = <HTMLDivElement>document.querySelector("div");
-        if (_event.currentTarget == document.querySelector(".fa-trash-can")) { 
+        if (_event.currentTarget == document.querySelector(".fa-trash-can")) {
             placehold.removeChild(placehold);
         }
 
-        if (_event.currentTarget == document.querySelector(".delete")) { 
+        if (_event.currentTarget == document.querySelector(".delete")) {
             placehold.remove();
         }
     }

@@ -8,19 +8,28 @@ Quellen: -
 var shoppingList;
 (function (shoppingList) {
     window.addEventListener("load", handleLoad);
+    let url = "https://webuser.hs-furtwangen.de/~aguiarra/Database/";
     async function handleLoad(_event) {
         let response = await fetch("Data.json");
         let offer = await response.text();
         let data = JSON.parse(offer);
         console.log(data);
         shoppingList.generateItem(data);
+        let query = new URLSearchParams();
+        // query.set("command", "find");
+        // query.set("collection", "Data");
+        query.set("command", "show");
+        console.log(query.toString());
+        let res = await fetch(url + "?" + query.toString());
+        let resText = await res.text();
+        alert(resText);
         let bt = document.querySelector(".submit");
         let del = document.querySelector(".fa-trash-can");
         bt.addEventListener("click", logItems);
         del.addEventListener("click", deleteItems);
     }
     function logItems(_event) {
-        console.log(_event.currentTarget);
+        // console.log(_event.currentTarget);
         let name = document.querySelector(".name");
         let num = document.querySelector(".num");
         let comment = document.querySelector(".comment");
@@ -29,7 +38,7 @@ var shoppingList;
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         let im = document.querySelector(".item");
-        let placehold = document.createElement("div");
+        let placehold = document.createElement("label");
         let trash = document.createElement("button");
         trash.type = ".fa-trash-can";
         im.appendChild(checkbox);
