@@ -9,23 +9,24 @@ var shoppingList;
 (function (shoppingList) {
     window.addEventListener("load", handleLoad);
     let url = "https://webuser.hs-furtwangen.de/~aguiarra/Database/";
+    let query = new URLSearchParams();
     async function handleLoad(_event) {
         let response = await fetch("Data.json");
         let offer = await response.text();
         let data = JSON.parse(offer);
         console.log(data);
         shoppingList.generateItem(data);
-        let query = new URLSearchParams();
-        // query.set("command", "find");
-        // query.set("collection", "Data");
-        query.set("command", "show");
+        query.set("command", "find");
+        query.set("collection", "Data");
         console.log(query.toString());
         let res = await fetch(url + "?" + query.toString());
         let resText = await res.text();
         alert(resText);
         let bt = document.querySelector(".submit");
+        let deb = document.querySelector("#DEBUG");
         let del = document.querySelector(".fa-trash-can");
         bt.addEventListener("click", logItems);
+        deb.addEventListener("click", DebugInfo);
         del.addEventListener("click", deleteItems);
     }
     function logItems(_event) {
@@ -35,6 +36,7 @@ var shoppingList;
         let comment = document.querySelector(".comment");
         let type = document.querySelector("#category");
         console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        console.log(query.toString());
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         let im = document.querySelector(".item");
@@ -62,6 +64,14 @@ var shoppingList;
         if (_event.currentTarget == document.querySelector(".delete")) {
             placehold.remove();
         }
+    }
+    async function DebugInfo() {
+        query.set("command", "find");
+        query.set("collection", "Data");
+        console.log(query.toString());
+        let res = await fetch(url + "?" + query.toString());
+        let resText = await res.text();
+        alert(resText);
     }
 })(shoppingList || (shoppingList = {}));
 //# sourceMappingURL=store.js.map

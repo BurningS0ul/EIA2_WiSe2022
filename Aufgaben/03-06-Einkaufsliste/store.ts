@@ -9,6 +9,7 @@ namespace shoppingList {
 
     window.addEventListener("load", handleLoad);
     let url: string = "https://webuser.hs-furtwangen.de/~aguiarra/Database/";
+    let query: URLSearchParams = new URLSearchParams();
 
     async function handleLoad(_event: Event): Promise<void> {
 
@@ -19,20 +20,21 @@ namespace shoppingList {
 
         generateItem(data);
 
-        let query: URLSearchParams = new URLSearchParams();
-        // query.set("command", "find");
-        // query.set("collection", "Data");
-        query.set("command", "show");
+        query.set("command", "find");
+        query.set("collection", "Data");
         console.log(query.toString());
 
         let res: Response = await fetch(url + "?" + query.toString());
         let resText: string = await res.text();
+
         alert(resText);
 
         let bt: HTMLInputElement = <HTMLInputElement>document.querySelector(".submit");
+        let deb: HTMLInputElement = <HTMLInputElement>document.querySelector("#DEBUG");
         let del: HTMLElement = <HTMLElement>document.querySelector(".fa-trash-can");
 
         bt.addEventListener("click", logItems);
+        deb.addEventListener("click", DebugInfo);
         del.addEventListener("click", deleteItems);
     }
 
@@ -44,6 +46,7 @@ namespace shoppingList {
         let type = <HTMLSelectElement>document.querySelector("#category");
 
         console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
+        console.log(query.toString());
 
         let checkbox: HTMLInputElement = document.createElement("input");
         checkbox.type = "checkbox";
@@ -77,5 +80,13 @@ namespace shoppingList {
             placehold.remove();
         }
     }
-}
 
+    async function DebugInfo() {
+        query.set("command", "find");
+        query.set("collection", "Data");
+        console.log(query.toString());
+        let res: Response = await fetch(url + "?" + query.toString());
+        let resText: string = await res.text();
+        alert(resText);
+    }
+}
