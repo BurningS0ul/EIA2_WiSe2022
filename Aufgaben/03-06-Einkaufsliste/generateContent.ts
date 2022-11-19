@@ -10,11 +10,18 @@ namespace shoppingList {
         [category: string]: Item[];
     }
 
-    export function generateItem(_data: Data) {
+    export interface FormDataJSON {
+        [key: string]: FormDataEntryValue | FormDataEntryValue[];
+    }
 
-        console.log("working");
+    export function generateItem(_data: Data) {
         for (let category in _data) {
             let items: Item[] = _data[category];
+
+            let list: any[] = [];
+            for (let test in _data) {
+                list.push(test);
+            }
 
             let group: HTMLElement | null = null;
             group = generateGroup(items, category);
@@ -24,7 +31,7 @@ namespace shoppingList {
                 fieldset.appendChild(group);
         }
     }
-    export function generateGroup(_items: Item[], _category: string) {
+    function generateGroup(_items: Item[], _category: string) {
         console.log("group");
         let group = <HTMLDivElement>document.createElement("div.item");
         for (let item of _items) {

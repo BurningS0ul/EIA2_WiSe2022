@@ -2,9 +2,12 @@
 var shoppingList;
 (function (shoppingList) {
     function generateItem(_data) {
-        console.log("working");
         for (let category in _data) {
             let items = _data[category];
+            let list = [];
+            for (let test in _data) {
+                list.push(test);
+            }
             let group = null;
             group = generateGroup(items, category);
             let fieldset = document.querySelector("fieldset#" + category);
@@ -30,6 +33,5 @@ var shoppingList;
         }
         return group;
     }
-    shoppingList.generateGroup = generateGroup;
 })(shoppingList || (shoppingList = {}));
 //# sourceMappingURL=generateContent.js.map
