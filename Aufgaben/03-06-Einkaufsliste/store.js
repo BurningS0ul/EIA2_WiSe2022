@@ -1,128 +1,176 @@
 "use strict";
-/* Aufgabe: 03-Einkaufsliste/ 04-Data struct/ 05-Json update / 06-Server Build
+/* Aufgabe: 03-Einkaufsliste/ 04-Data struct/ 05-Json update / 06-Server Build / 06.5-Server REMAKE
 Name: Arthur Aguiar Rafael
 Matrikel: 271023
-Datum: 27.10.2022/ 03.11.2022 / 10.11.2022 / 19.11.2022
-Quellen: - / - / - / Bastian Aberle
+Datum: 27.10.2022/ 03.11.2022 / 10.11.2022 / 19.11.2022 / 23.11.2022
+Quellen: - / - / - / Bastian Aberle / Bastian Aberle
 */
-var shoppingList;
-(function (shoppingList) {
+var shoppinglist;
+(function (shoppinglist) {
     window.addEventListener("load", handleLoad);
-    let url = "https://webuser.hs-furtwangen.de/~aguiarra/Database/";
+    let url = "https://webuser.hs-furtwangen.de/~aguiarra/Database/?";
     let query = new URLSearchParams();
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    let trash = document.createElement("i");
-    trash.classList.add("fa-solid");
-    trash.classList.add("fa-trash-can");
-    let placehold = document.querySelector("Label");
-    async function handleLoad(_event) {
-        let response = await fetch("data.json");
+    async function handleResponse() {
+        let response = await fetch(url + query.toString());
         let entry = await response.text();
         let data = JSON.parse(entry);
-        console.log(data);
-        shoppingList.generateItem(data);
-        query.set("command", "show");
-        query.set("collection", "data");
-        console.log(query.toString());
-        let res = await fetch(url + "?" + query.toString());
-        let resText = await res.text();
-        console.log(resText);
-        query.set("command", "create");
-        query.set("collection", "data");
-        console.log(query.toString());
-        console.log(resText);
-        // if () {
-        //     query.set("command", "create");
-        //     query.set("collection", "Data");
-        //     console.log(query.toString());
-        //     console.log(resText);
-        // }
-        let bt = document.querySelector(".submit");
-        let deb = document.querySelector("#DEBUG");
-        let del = document.querySelector(".fa-solid.fa-trash-can");
-        let delall = document.querySelector(".delete");
-        bt.addEventListener("click", logItems);
-        deb.addEventListener("click", DebugInfo);
-        del.addEventListener("click", deleteItems);
-        delall.addEventListener("click", deleteItems);
+        loadData(data);
     }
-    async function logItems(_event) {
-        // console.log(_event.currentTarget);
-        let name = document.querySelector(".name");
-        let num = document.querySelector(".num");
-        let comment = document.querySelector(".comment");
-        let type = document.querySelector("#category");
-        console.log("Added Item: " + num.value + " " + name.value + " " + grabDate() + " " + type.value + " " + comment.value);
-        let im = document.querySelector(".item");
-        let placehold = document.createElement("label");
-        im.appendChild(checkbox);
-        placehold.textContent = name.value + " " + num.value + " " + grabDate() + " " + type.value + " " + comment.value;
-        im.appendChild(placehold);
-        im.appendChild(trash);
+    async function handleLoad() {
+        let button = document.querySelector(".submit");
+        button.addEventListener("click", sendData);
+    }
+    async function sendData() {
         let formData = new FormData(document.forms[0]);
         let json = {};
+        //Umwandlung FormData in Json FormData
         for (let key of formData.keys())
             if (!json[key]) {
                 let values = formData.getAll(key);
                 json[key] = values.length > 1 ? values : values[0];
             }
         let newJSON = JSON.stringify(json);
-        console.log(newJSON);
         query.set("command", "insert");
         query.set("collection", "data");
         query.set("data", newJSON);
-        // console.log(JSON.stringify(json));  
-        let res = await fetch(url + "?" + query.toString());
-        let resText = await res.text();
-        alert(resText);
+        handleResponse();
         console.log("data sent");
-        clearInputs();
+        loadInput();
     }
-    function grabDate() {
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return day + "/" + month + "/" + year;
+    function loadData(newData) {
+        let list = [];
+        for (let num in newData.data) {
+            list.push(num);
+        }
+        for (let index of list) {
+            let item = newData.data[index].Item;
+            let amount = newData.data[index].Amount;
+            let category = newData.data[index].Category;
+            let date = newData.data[index].NewDate.toString();
+            let comment = newData.data[index].Area;
+            let purchaseCheckbox = newData.data[index].Checkbox;
+            let purchase;
+            if (purchaseCheckbox == "on") {
+                purchase = " buy";
+            }
+            else {
+                purchase = "";
+            }
+            loadItem(item, amount, category, comment, purchase, date, index);
+        }
     }
-    async function deleteItems(_event) {
+    function loadInput() {
+        let formData = new FormData(document.forms[0]);
+        let amount = formData.get("input#quantity").toString();
+        let item = formData.get(".name").toString();
+        let date = formData.get(".date").toString();
+        let category = formData.get("#category").toString();
+        let comment = formData.get(".comment").toString();
+        let index;
+        let purchaseCheckbox = formData.get("Checkbox");
+        let purchase = "";
+        if (purchaseCheckbox == null) {
+            purchase = "";
+        }
+        else {
+            purchase = " buy";
+        }
+        loadItem(item, amount, category, comment, purchase, date, index);
+        window.open("./list.html", "_self");
+    }
+    function loadItem(amount, item, category, comment, purchase, date, index) {
+        let newDiv = document.createElement("div");
+        newDiv.id = "createDiv";
+        let parent = document.querySelector(".item");
+        newDiv.className = "genoutput";
+        newDiv.innerHTML = date + " " + amount + " " + item + " " + comment + " " + purchase;
+        parent.appendChild(newDiv);
+        let newContainer = document.createElement("div");
+        newContainer.id = "containerIcons";
+        newDiv.appendChild(newContainer);
+        let newCheckbox = document.createElement("input");
+        newCheckbox.type = "checkbox";
+        newCheckbox.name = "Checkbox";
+        newContainer.appendChild(newCheckbox);
+        let newEdit = document.createElement("i");
+        newEdit.classList.add("fa-solid");
+        newEdit.classList.add("fa-pen-to-square");
+        newContainer.appendChild(newEdit);
+        let newTrash = document.createElement("i");
+        newTrash.classList.add("fa-solid");
+        newTrash.classList.add("fa-trash-can");
+        newContainer.appendChild(newTrash);
+        newEdit.addEventListener("click", function () {
+            editItem(newDiv, item, amount, comment, date, index);
+        });
+        newTrash.addEventListener("click", function () {
+            deleteItem(newDiv, index);
+        });
+        newCheckbox.addEventListener("click", function () {
+            getDate(newDiv, index, item, amount, category, comment, date, purchase);
+        });
+    }
+    async function getDate(newDiv, index, item, amount, category, comment, date, purchase) {
+        console.log("checkbox");
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1;
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+        var NewDate = year + "-" + month + "-" + day;
+        newDiv.innerHTML = NewDate + " " + amount + " " + item + " " + comment + " " + purchase;
+        let newContainer = document.createElement("div");
+        newContainer.id = "containerIcons";
+        newDiv.appendChild(newContainer);
+        let newCheckbox = document.createElement("input");
+        newCheckbox.type = "checkbox";
+        newCheckbox.checked = true;
+        newContainer.appendChild(newCheckbox);
+        let newEdit = document.createElement("i");
+        newEdit.classList.add("fa-solid");
+        newEdit.classList.add("fa-pen-to-square");
+        newContainer.appendChild(newEdit);
+        let newTrash = document.createElement("i");
+        newTrash.classList.add("fa-solid");
+        newTrash.classList.add("fa-trash-can");
+        newContainer.appendChild(newTrash);
+        newEdit.addEventListener("click", function () {
+            editItem(newDiv, item, amount, comment, date, index);
+        });
+        newTrash.addEventListener("click", function () {
+            deleteItem(newDiv, index);
+        });
+        newCheckbox.addEventListener("click", function () {
+            getDate(newDiv, index, item, amount, category, comment, date, purchase);
+        });
+        let json = { NewDate };
+        let newJSON = JSON.stringify(json);
+        let query = new URLSearchParams();
+        query.set("command", "update");
+        query.set("collection", "data");
+        query.set("id", index);
+        query.set("data", newJSON);
+        handleResponse();
+        console.log("data sent");
+    }
+    async function deleteItem(newDiv, index) {
+        newDiv.parentElement.removeChild(newDiv);
+        let query = new URLSearchParams();
+        query.set("command", "delete");
+        query.set("collection", "data");
+        query.set("id", index.toString());
+        handleResponse();
         console.log("deleted");
-        if (_event.currentTarget == document.querySelector(".fa-solid.fa-trash-can")) {
-            placehold.removeChild(placehold);
-            query.set("command", "delete");
-            query.set("collection", "data");
-            query.set("id", query.toString());
-            let res = await fetch(url + "?" + query.toString());
-            let resText = await res.text();
-            alert(resText);
-        }
-        if (_event.currentTarget == document.querySelector(".delete")) {
-            query.set("command", "delete");
-            query.set("collection", "data");
-            let res = await fetch(url + "?" + query.toString());
-            let resText = await res.text();
-            alert(resText);
-            checkbox.remove();
-            placehold.remove();
-        }
     }
-    async function DebugInfo() {
-        query.set("command", "show");
-        console.log(query.toString());
-        let res = await fetch(url + "?" + query.toString());
-        let resText = await res.text();
-        alert(resText);
+    async function editItem(newDiv, item, amount, comment, date, index) {
+        let itemx = document.querySelector("input.name");
+        itemx.value = item;
+        let amountx = document.querySelector("input.num");
+        amountx.value = amount.toString();
+        let commentx = document.querySelector("input.comment");
+        commentx.value = comment;
+        let datex = document.querySelector("input.date");
+        datex.value = date;
+        deleteItem(newDiv, index);
     }
-    function clearInputs() {
-        let name = document.querySelector(".name");
-        let num = document.querySelector(".num");
-        let comment = document.querySelector(".comment");
-        let type = document.querySelector("#category");
-        num.value = "";
-        name.value = "";
-        type.value = "Choose Category";
-        comment.value = "";
-    }
-})(shoppingList || (shoppingList = {}));
+})(shoppinglist || (shoppinglist = {}));
 //# sourceMappingURL=store.js.map
