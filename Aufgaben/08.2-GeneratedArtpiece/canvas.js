@@ -3,10 +3,10 @@
 Name: Arthur Aguiar Rafael
 Matrikel: 271023
 Datum: 30.11.22
-Quellen: EIA 2 Videos, Bastian Aberle, Lisa
+Quellen: EIA 2 Videos, Bastian Aberle, Lisa Bindenhöfer
 */
-var Landscape;
-(function (Landscape) {
+var Artpiece;
+(function (Artpiece) {
     window.addEventListener("load", handleLoad);
     let ctx;
     let golden = 0.62;
@@ -22,6 +22,15 @@ var Landscape;
         makeClouds({ x: 500, y: 125 }, { x: 250, y: 75 });
         randomMountain(posMountains, 75, 200, getRandomValue("#"), getRandomLight("#"));
         randomMountain(posMountains, 50, 150, "#222222", "#DDDDDD");
+        buildSnowman({ x: 1000, y: 1060 });
+    }
+    function drawCircle() {
+        let r = 60;
+        ctx.arc(0, 0, r, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FFFFDD";
+        ctx.fill();
+        ctx.restore();
+        ctx.closePath();
     }
     function getRandomBlue(_color) {
         let letters = "23456789ABCDE";
@@ -52,7 +61,7 @@ var Landscape;
         let gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
         gradient.addColorStop(0, getRandomBlue("#0000"));
         gradient.addColorStop(golden, getRandomLight("#"));
-        gradient.addColorStop(1, getRandomBlue("#0000"));
+        gradient.addColorStop(1, getRandomBlue("#DDDD"));
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
@@ -116,5 +125,50 @@ var Landscape;
         ctx.fill();
         ctx.restore();
     }
-})(Landscape || (Landscape = {}));
+    function buildSnowman(_position) {
+        console.log("Snowman", _position);
+        let h = 10;
+        let h2 = 60;
+        let w = 100;
+        let w2 = 80;
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x, _position.y);
+        ctx.scale(1.25, 1.25);
+        drawCircle();
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x, _position.y - 60);
+        drawCircle();
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x, _position.y - 120);
+        ctx.scale(0.75, 0.75);
+        drawCircle();
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x - 50, _position.y - 150);
+        ctx.rect(0, 0, w, h);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+        ctx.restore();
+        ctx.closePath();
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x - 40, _position.y - 160);
+        ctx.rect(0, 0, w2, h);
+        ctx.fillStyle = "#FF0000";
+        ctx.fill();
+        ctx.restore();
+        ctx.closePath();
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(_position.x - 40, _position.y - 220);
+        ctx.rect(0, 0, w2, h2);
+        ctx.fillStyle = "#000000";
+        ctx.fill();
+        ctx.restore();
+        ctx.closePath();
+    }
+})(Artpiece || (Artpiece = {}));
 //# sourceMappingURL=canvas.js.map
