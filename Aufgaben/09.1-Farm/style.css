@@ -1,0 +1,31 @@
+body {
+    background-color: #5c4372;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#day,
+#foods,
+#output {
+    width: 20%;
+    margin: 20px;
+    padding: 10px;
+    background-color: #d6d6d6;
+    border-radius: 10px;
+}
+
+#eat1,
+#eat2,
+#eat3,
+#eat4,
+#eat5 {
+    color: #808080;
+}
