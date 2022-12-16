@@ -13,13 +13,10 @@ var Artpiece;
     let i = 0;
     let j = 0;
     let snowflakes = [];
-    for (i = 0; i < 200; i++) {
+    for (i = 0; i < 400; i++) {
         snowflakes.push(new Artpiece.Snowflake());
     }
     let imgdata;
-    let minrad = Math.round(Math.random() * 1);
-    let maxrad = Math.round(Math.random() * 3);
-    Artpiece.rad = Math.round(Math.random() * (maxrad - minrad + 1) + minrad);
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         Artpiece.ctx = canvas.getContext("2d");

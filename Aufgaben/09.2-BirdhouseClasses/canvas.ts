@@ -14,13 +14,10 @@ namespace Artpiece {
     let i: number = 0;
     let j: number = 0;
     let snowflakes = [];
-    for (i = 0; i < 200; i++) {
+    for (i = 0; i < 400; i++) {
         snowflakes.push(new Snowflake());
     }
     let imgdata: ImageData;
-    let minrad: number = Math.round(Math.random() * 1);
-    let maxrad: number = Math.round(Math.random() * 3);
-    export let rad: number = Math.round(Math.random() * (maxrad - minrad + 1) + minrad);
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
