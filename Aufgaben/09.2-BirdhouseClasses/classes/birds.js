@@ -17,6 +17,9 @@ var Artpiece;
             this.direction = Math.random() * 2 * Math.PI;
         }
         update() {
+            if (this.pos.y <= window.innerHeight * 7 / 8) {
+                this.draw();
+            }
             this.pos.x += this.speed * Math.cos(this.direction);
             this.pos.y += this.speed * Math.sin(this.direction);
             this.direction += (Math.random() - 0.5) * 0.1;
@@ -44,7 +47,12 @@ var Artpiece;
             this.landTimer = 5 + Math.random() * 15;
             this.landTimer++;
             this.speed = 0;
-            this.drawLanded();
+            if (Math.random() < 0.1) {
+                this.peck();
+            }
+            else {
+                this.drawLanded();
+            }
             if (this.landTimer >= 20) {
                 this.landed = false;
                 this.update();
@@ -88,6 +96,82 @@ var Artpiece;
             Artpiece.ctx.ellipse(this.pos.x - 6, this.pos.y + 4, this.size, this.size / 1.4, 0, 0, 2 * Math.PI);
             Artpiece.ctx.fillStyle = Artpiece.darkenColor(this.color, 0.5);
             Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.translate(+15, -this.size / 1.5);
+            Artpiece.ctx.arc(this.pos.x, this.pos.y, 2, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = "#000000";
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.translate(this.pos.x, this.pos.y + this.size);
+            Artpiece.ctx.lineTo(0, 0);
+            Artpiece.ctx.lineTo(2, 2);
+            Artpiece.ctx.lineTo(-4, 6);
+            Artpiece.ctx.lineTo(0, 8);
+            Artpiece.ctx.stroke();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+        }
+        peck() {
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.ellipse(this.pos.x - 4, this.pos.y - 2, this.size, this.size / 1.4, 0, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = Artpiece.darkenColor(this.color, 0.5);
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.arc(this.pos.x, this.pos.y, this.size, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = this.color;
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            let beak = this.size + 4;
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.lineTo(this.pos.x + beak, this.pos.y + 20);
+            Artpiece.ctx.lineTo(this.pos.x + beak + 10, this.pos.y + 28);
+            Artpiece.ctx.lineTo(this.pos.x + beak + 2, this.pos.y + 16);
+            Artpiece.ctx.fillStyle = "#FFAA00";
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.arc(this.pos.x + 14, this.pos.y + 6, this.size - 4, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = this.color;
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.ellipse(this.pos.x - 6, this.pos.y + 4, this.size, this.size / 1.4, 0, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = Artpiece.darkenColor(this.color, 0.5);
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.translate(+20, +this.size / 1.6);
+            Artpiece.ctx.arc(this.pos.x, this.pos.y, 2, 0, 2 * Math.PI);
+            Artpiece.ctx.fillStyle = "#000000";
+            Artpiece.ctx.fill();
+            Artpiece.ctx.restore();
+            Artpiece.ctx.closePath();
+            Artpiece.ctx.save();
+            Artpiece.ctx.beginPath();
+            Artpiece.ctx.translate(this.pos.x, this.pos.y + this.size);
+            Artpiece.ctx.lineTo(0, 0);
+            Artpiece.ctx.lineTo(2, 2);
+            Artpiece.ctx.lineTo(-4, 6);
+            Artpiece.ctx.lineTo(0, 8);
+            Artpiece.ctx.stroke();
             Artpiece.ctx.restore();
             Artpiece.ctx.closePath();
         }

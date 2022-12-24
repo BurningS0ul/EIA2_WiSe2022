@@ -35,8 +35,7 @@ var Artpiece;
         if (!canvas) {
             return;
         }
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        resizeCanvas();
         let horizon = Artpiece.ctx.canvas.height * golden;
         let posMountains = { x: 0, y: horizon };
         let posTrees = { x: 0, y: horizon };
@@ -51,6 +50,11 @@ var Artpiece;
         imgdata = Artpiece.ctx.getImageData(0, 0, canvas.width, canvas.height);
         releaseBirds();
         letItSnow();
+    }
+    function resizeCanvas() {
+        let canvas = document.querySelector("canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     }
     function drawCircle(_r, _color) {
         Artpiece.ctx.arc(0, 0, _r, 0, 2 * Math.PI);
@@ -430,7 +434,6 @@ var Artpiece;
         Artpiece.ctx.putImageData(imgdata, 0, 0);
         for (let birdie of birds) {
             birdie.update();
-            birdie.draw();
         }
         requestAnimationFrame(releaseBirds);
     }

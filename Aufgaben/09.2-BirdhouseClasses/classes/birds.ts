@@ -17,6 +17,9 @@ namespace Artpiece {
         }
 
         update() {
+            if (this.pos.y <= window.innerHeight * 7 / 8) {
+                this.draw();
+            }
             this.pos.x += this.speed * Math.cos(this.direction);
             this.pos.y += this.speed * Math.sin(this.direction);
             this.direction += (Math.random() - 0.5) * 0.1;
@@ -48,7 +51,12 @@ namespace Artpiece {
             this.landTimer++;
             this.speed = 0;
 
-            this.drawLanded();
+            if (Math.random() < 0.1) {
+                this.peck();
+            }
+            else{
+                this.drawLanded();
+            }
 
             if (this.landTimer >= 20) {
                 this.landed = false;
@@ -100,6 +108,93 @@ namespace Artpiece {
             ctx.fill();
             ctx.restore();
             ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.translate(+15, -this.size / 1.5);
+            ctx.arc(this.pos.x, this.pos.y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.translate(this.pos.x, this.pos.y + this.size);
+            ctx.lineTo(0, 0);
+            ctx.lineTo(2, 2);
+            ctx.lineTo(-4, 6);
+            ctx.lineTo(0, 8);
+            ctx.stroke();
+            ctx.restore();
+            ctx.closePath();
+
+        }
+
+        peck() {
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(this.pos.x - 4, this.pos.y - 2, this.size, this.size / 1.4, 0, 0, 2 * Math.PI);
+            ctx.fillStyle = darkenColor(this.color, 0.5);
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.pos.x, this.pos.y, this.size, 0, 2 * Math.PI);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            let beak: number = this.size + 4;
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineTo(this.pos.x + beak, this.pos.y + 20);
+            ctx.lineTo(this.pos.x + beak + 10, this.pos.y + 28);
+            ctx.lineTo(this.pos.x + beak + 2, this.pos.y + 16);
+            ctx.fillStyle = "#FFAA00";
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.pos.x + 14, this.pos.y + 6, this.size - 4, 0, 2 * Math.PI);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(this.pos.x - 6, this.pos.y + 4, this.size, this.size / 1.4, 0, 0, 2 * Math.PI);
+            ctx.fillStyle = darkenColor(this.color, 0.5);
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.translate(+20, +this.size / 1.6);
+            ctx.arc(this.pos.x, this.pos.y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.translate(this.pos.x, this.pos.y + this.size);
+            ctx.lineTo(0, 0);
+            ctx.lineTo(2, 2);
+            ctx.lineTo(-4, 6);
+            ctx.lineTo(0, 8);
+            ctx.stroke();
+            ctx.restore();
+            ctx.closePath();
+
         }
 
         draw() {

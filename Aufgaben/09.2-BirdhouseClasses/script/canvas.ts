@@ -41,8 +41,7 @@ namespace Artpiece {
             return;
         }
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        resizeCanvas();
 
         let horizon: number = ctx.canvas.height * golden;
 
@@ -60,6 +59,12 @@ namespace Artpiece {
         imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
         releaseBirds();
         letItSnow();
+    }
+
+    function resizeCanvas(): void {
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+        canvas!.width = window.innerWidth;
+        canvas!.height = window.innerHeight;
     }
 
     function drawCircle(_r: number, _color: string) {
@@ -100,7 +105,6 @@ namespace Artpiece {
 
         return "#" + r + g + b;
     }
-
 
     function getRandomLight(_color: string) {
         let letters: string = "CDEF";
@@ -498,7 +502,6 @@ namespace Artpiece {
         ctx.putImageData(imgdata, 0, 0);
         for (let birdie of birds) {
             birdie.update();
-            birdie.draw();
         }
         requestAnimationFrame(releaseBirds);
     }
